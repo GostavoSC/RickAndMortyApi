@@ -15,7 +15,6 @@ class MainViewModel(private val mainRepository: MainRepository): ViewModel() {
             }
         }
 
-
     }
 
 }
