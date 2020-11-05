@@ -1,7 +1,8 @@
 package com.gustavosc.rickandmortyapi.data.repository.dto
 
 import com.gustavosc.rickandmortyapi.data.model.Character
+import java.util.ArrayList
 
 class ListOfCharactersDto (
-    var results: List<Character>
+    var results: ArrayList<Character>
 )
