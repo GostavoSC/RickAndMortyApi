@@ -1,20 +1,30 @@
 package com.gustavosc.rickandmortyapi.ui.main.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import com.gustavosc.rickandmortyapi.data.model.Character
 import com.gustavosc.rickandmortyapi.data.repository.MainRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import java.util.*
 
-class MainViewModel(private val mainRepository: MainRepository): ViewModel() {
+class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun getAllCharacters() = liveData(Dispatchers.IO){
-        mainRepository.also {
-            if (it.getAllCharacters().isSuccessful){
-                emit(it.getAllCharacters().body()!!.results)
+
+    val character = MutableLiveData<ArrayList<Character>>()
+
+    fun getAllCharacters() {
+        viewModelScope.launch {
+            mainRepository.also {
+                if (it.getAllCharacters().isSuccessful) {
+                    character.postValue(it.getAllCharacters().body()!!.results)
+                } else {
+                    character.postValue(arrayListOf())
+                }
             }
-        }
 
+        }
     }
 
 }
+

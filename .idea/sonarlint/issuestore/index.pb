@@ -1,0 +1,23 @@
+
+ä
+Zapp/src/main/java/com/gustavosc/rickandmortyapi/data/repository/dto/ListOfCharactersDto.kt,8\8\88293dac08835a386894732f42bf8b1f60aba920
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+Ç
+Rapp/src/main/java/com/gustavosc/rickandmortyapi/ui/main/adapter/AdapterRecycler.kt,f\0\f0920b5497a35624d54e5424ee3bb202a11b87af
+u
+Eapp/src/main/java/com/gustavosc/rickandmortyapi/data/api/ApiHelper.kt,3\3\33e2d5ee1ed599e61a80a66d1d9c209b586c530f
+v
+Fapp/src/main/java/com/gustavosc/rickandmortyapi/data/api/ApiService.kt,6\5\65ba5b089d650140be72adbb06de04c1e477214f
+Å
+Qapp/src/main/java/com/gustavosc/rickandmortyapi/data/repository/MainRepository.kt,4\0\406bb192decae30b09252765c7fb74beb6f22bc2
+|
+Lapp/src/main/java/com/gustavosc/rickandmortyapi/ui/main/view/MainActivity.kt,e\4\e42b18d8aee623089180c65d806e41bdd8c8a9b9
+Ç
+Rapp/src/main/java/com/gustavosc/rickandmortyapi/ui/main/viewmodel/MainViewModel.kt,4\0\409f35243d4013bafd53f872fc5330c9184e4697
+Å
+Qapp/src/androidTest/java/com/gustavosc/rickandmortyapi/ExampleInstrumentedTest.kt,9\d\9d7a6fd213b35b86f4c61ed280cdfed9fc1db8b3
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+w
+Gapp/src/test/java/com/gustavosc/rickandmortyapi/ui/MainViewModelTest.kt,4\e\4e25f577309e4224c14d30e034385a1fa641388e

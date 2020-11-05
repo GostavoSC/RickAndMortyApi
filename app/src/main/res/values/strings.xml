@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Rick And Morty Api</string>
+    <string name="unhide_details">Unhide Details</string>
+    <string name="breed">breed</string>
+    <string name="state_live_character">state live character</string>
+    <string name="name_character">name character</string>
+    <string name="hide_button_text">hide</string>
+    <string name="unhide_button_text">unhide</string>
 </resources>
