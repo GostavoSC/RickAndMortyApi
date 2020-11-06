@@ -27,7 +27,7 @@ class MainRepositoryTest() {
 
     @Test
     fun shouldPassInMethodOneTurn() {
-        coEvery { apiHelper.getAllCharacters() } returns Response.success(
+        coEvery { apiHelper.getAllFirstCharacters() } returns Response.success(
             ListOfCharactersDto(
                 arrayListOf()
             )

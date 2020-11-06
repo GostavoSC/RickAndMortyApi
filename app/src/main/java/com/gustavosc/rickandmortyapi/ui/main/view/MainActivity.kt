@@ -1,7 +1,11 @@
 package com.gustavosc.rickandmortyapi.ui.main.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.HorizontalScrollView
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: AdapterRecycler
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var scrollView: ScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +35,46 @@ class MainActivity : AppCompatActivity() {
             androidContext(this@MainActivity)
             modules(viewModelModule)
         }
+
         setupAdapter()
         setupObseverListOfCharacter()
+        setupButtons()
+        setupScroll()
+    }
+
+    private fun setupScroll() {
+        scrollView = findViewById(R.id.scroll)
+
+    }
+
+    private fun setupButtons() {
+        nextButton = findViewById(R.id.nextButton)
+        previewButton = findViewById(R.id.previewButton)
+
+        nextButton.setOnClickListener {
+            page++
+            Log.e("value: ",page.toString())
+            viewModel.getCharactersFromPage(page)
+
+        }
+
+        previewButton.setOnClickListener {
+            if (page > 1) {
+                previewButton.isClickable = true
+                page--
+                viewModel.getCharactersFromPage(page)
+
+            }else{
+                previewButton.isClickable = false
+            }
+
+        }
     }
 
     private val viewModel: MainViewModel by viewModel()
+    private lateinit var nextButton: Button
+    private lateinit var previewButton: Button
+    private var page: Int = 1
 
 
     val viewModelModule = module {

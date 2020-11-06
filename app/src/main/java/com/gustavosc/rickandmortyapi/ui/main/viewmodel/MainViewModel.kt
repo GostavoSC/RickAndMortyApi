@@ -26,5 +26,17 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun getCharactersFromPage(page: Int) {
+        viewModelScope.launch {
+            mainRepository.also {
+                if (it.getFromPage(page).isSuccessful) {
+                    character.value?.clear()
+                    character.postValue(it.getFromPage(page).body()!!.results)
+                } else {
+                    character.postValue(arrayListOf())
+                }
+            }
+        }
+    }
 }
 

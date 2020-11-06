@@ -33,10 +33,10 @@ class ApiHelperTest {
         )
 
         runBlocking {
-            apiHelper.getAllCharacters()
+            apiHelper.getAllFirstCharacters()
         }
 
-        coVerify(exactly = 1) { apiHelper.getAllCharacters() }
+        coVerify(exactly = 1) { apiHelper.getAllFirstCharacters() }
     }
 
 }
