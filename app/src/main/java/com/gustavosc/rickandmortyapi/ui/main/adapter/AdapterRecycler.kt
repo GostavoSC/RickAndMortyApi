@@ -1,22 +1,27 @@
 package com.gustavosc.rickandmortyapi.ui.main.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.gustavosc.rickandmortyapi.R
 import com.gustavosc.rickandmortyapi.data.model.Character
 import java.util.*
 
 class AdapterRecycler(
     private val characters: ArrayList<Character>,
-    val btnlistener: BtnClickListener,
-    val context: Context
+    private val context: Context
 ) :
     RecyclerView.Adapter<AdapterRecycler.DataViewHolder>() {
 
@@ -26,15 +31,24 @@ class AdapterRecycler(
 
     private fun searchImage(url: String, holder: DataViewHolder) {
         Glide.with(context)
+            .asBitmap()
             .load(url)
-            .override(600, 700)
-            .into(holder.image)
+            .override(400, 400)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    setBackgroundColor(resource, holder)
+                    holder.image.setImageBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    //TODO
+                }
+            })
     }
 
     fun addListCharacter(list: ArrayList<Character>) {
         characters.clear()
         characters.addAll(list)
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder =
@@ -47,15 +61,10 @@ class AdapterRecycler(
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val character = characters[position]
-        onClick = btnlistener
         holder.name.text = character.name
         holder.state.text = character.status
         holder.breed.text = character.species
-        holder.gender.text = character.gender
         searchImage(character.image, holder)
-        holder.button.setOnClickListener {
-            onClick.onBtnClick(character, holder)
-        }
     }
 
     fun verifyIfTextButtonIsHide(name: String): Boolean {
@@ -70,14 +79,24 @@ class AdapterRecycler(
         fun onBtnClick(character: Character, holder: DataViewHolder)
     }
 
-    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name = itemView.findViewById<TextView>(R.id.nameCharacterTextView)
-        val state = itemView.findViewById<TextView>(R.id.stateLiveTextView)
-        val breed = itemView.findViewById<TextView>(R.id.breedOfCharacterTextView)
-        val gender = itemView.findViewById<TextView>(R.id.genderCharacterTextView)
-        val image = itemView.findViewById<ImageView>(R.id.imageOfCharacterImageView)
-        val button = itemView.findViewById<Button>(R.id.showDetailsButton)
+    fun setBackgroundColor(bitmap: Bitmap, holder: DataViewHolder) {
+        val vibrantSwatch = createPaletteSync(bitmap).vibrantSwatch
+        val bb = createPaletteSync(bitmap).dominantSwatch
+        with(holder.layout) {
+            setBackgroundColor(
+                vibrantSwatch?.rgb ?: bb?.rgb ?: ContextCompat.getColor(context, R.color.white)
+            )
+        }
     }
 
+    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val layout: ConstraintLayout = itemView.findViewById(R.id.layoutRecycler)
+        val name: TextView = itemView.findViewById(R.id.nameCharacterTextView)
+        val state: TextView = itemView.findViewById(R.id.stateLiveTextView)
+        val breed: TextView = itemView.findViewById(R.id.breedOfCharacterTextView)
+        val image: ImageView = itemView.findViewById(R.id.imageOfCharacterImageView)
+    }
+
+    private fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()
 
 }

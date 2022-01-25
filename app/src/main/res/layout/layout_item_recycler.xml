@@ -1,71 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutRecycler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="6dp"
-    android:layout_marginLeft="6dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="6dp"
-    android:layout_marginRight="6dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="25dp"
     android:background="@drawable/shape_from_item_recycler"
-    android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingTop="6dp"
-    android:paddingRight="6dp"
+    android:paddingRight="10dp"
     app:layoutDescription="@xml/layout_item_recycler_scene">
-
-    <TextView
-        android:id="@+id/nameCharacterTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/name_character"
-        android:textColor="#292525"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/stateLiveTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/state_live_character"
-        android:textColor="#292525"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/breedOfCharacterTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/breed"
-        android:textColor="#292525"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/genderCharacterTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="gender"
-        android:textColor="#292525"
-        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/imageOfCharacterImageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:background="@drawable/shape_from_item_recycler"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/showDetailsButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/unhide_details"
-        android:textColor="@color/color_button"
-        android:textSize="18sp"
-        app:iconTint="@color/color_button"
-        app:rippleColor="@color/color_button" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/imageOfCharacterImageView"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/nameCharacterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/name_character"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/stateLiveTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/state_live_character"
+            android:textColor="#A5A5A5"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/breedOfCharacterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/breed"
+            android:textColor="#A5A5A5"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

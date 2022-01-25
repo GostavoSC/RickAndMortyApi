@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#202329"
     android:clickable="false"
     tools:context=".ui.main.view.MainActivity">
 
@@ -22,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#ADFDFCFC">
+                android:background="#202329"
+                tools:listitem="@layout/layout_item_recycler">
 
             </androidx.recyclerview.widget.RecyclerView>
 

@@ -1,28 +1,44 @@
 package com.gustavosc.rickandmortyapi.ui.main.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gustavosc.rickandmortyapi.data.model.Character
 import com.gustavosc.rickandmortyapi.data.repository.MainRepository
+import com.gustavosc.rickandmortyapi.ui.main.utils.getFiveRandomNumbers
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.ArrayList
 
 class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-
-    val character = MutableLiveData<ArrayList<Character>>()
-
+    private val _character = MutableLiveData<ArrayList<Character>>()
+    val character :LiveData<ArrayList<Character>> = _character
+    val fiveCharacterRandom = MutableLiveData<ArrayList<Character>>()
     fun getAllCharacters() {
         viewModelScope.launch {
             mainRepository.also {
                 if (it.getAllCharacters().isSuccessful) {
-                    character.postValue(it.getAllCharacters().body()!!.results)
+                    _character.postValue(it.getAllCharacters().body()!!.results)
                 } else {
-                    character.postValue(arrayListOf())
+                    _character.postValue(arrayListOf())
                 }
             }
 
+        }
+    }
+
+    fun getOnlyFiveCharacters() {
+        viewModelScope.launch {
+            mainRepository.also{
+                val numbers = getFiveRandomNumbers()
+                if (it.getRandomCharacters(numbers).isSuccessful) {
+                    fiveCharacterRandom.value.orEmpty()
+                    fiveCharacterRandom.postValue(it.getRandomCharacters(numbers).body())
+                } else {
+                    fiveCharacterRandom.postValue(arrayListOf())
+                }
+            }
         }
     }
 
@@ -30,10 +46,10 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         viewModelScope.launch {
             mainRepository.also {
                 if (it.getFromPage(page).isSuccessful) {
-                    character.value?.clear()
-                    character.postValue(it.getFromPage(page).body()!!.results)
+                    _character.value.orEmpty()
+                    _character.postValue(it.getFromPage(page).body()!!.results)
                 } else {
-                    character.postValue(arrayListOf())
+                    _character.postValue(arrayListOf())
                 }
             }
         }
